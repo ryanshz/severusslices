@@ -3,61 +3,65 @@ const items = [
     { 
         id: 1, 
         name: 'The Roman Pizza Banquet',
-        image: '..public/images/rpizzabanquet.JPG',
+        image: 'images/pizzabanquet.JPG',
         alt: 'Roman soldiers eating pizzas in a dining hall.',
         condition: 'perfect condition',
         price: '$1000.00',
         seller: 'The Roman Empire',
-        offer: '3 offers'
+        offer: '3'
     },
     { 
         id: 2, 
         name: 'The Bath of Pizza',
-        image: '..public/images/pizzabath.jpg',
+        image: 'images/pizzabath.JPG',
         alt: 'A roman soldier bathing in pizza.',
         condition: 'good condition',
         price: '$300.00',
         seller: 'Emperor Nero',
-        offer: '0 offers'
+        offer: '0'
     },
     { 
         id: 3, 
         name: 'Free Conquest',
-        image: '../public/images/freeconquest.JPG',
+        image: 'images/freeconquest.JPG',
         alt: 'Roman soldiers conquering a local Dominos.',
         condition: 'poor condition',
         price: 'Free with any purchase',
         seller: 'The Third Gallica',
-        offer: '6 offers'
+        offer: '6'
     },
     {
         id: 4,
         name: 'Pizza Hit',
-        image: '../public/images/pizzahit.jpg',
+        image: 'images/pizzahit.jpg',
         alt: 'A shirtless man, and a man with a hood holding a pizza.',
         condition: 'great condition',
         price: 'Negotiable',
         seller: 'Cicero Caesar',
-        offer: '1 offer'
+        offer: '1'
     },
     {
         id: 5,
         name: 'The Faceless Pie',
-        image: '../public/images/facelesspie.jpg',
+        image: 'images/facelesspie.jpg',
         alt: 'Faceless Roman soldiers standing behind a pizza.',
         condition: 'perfect condition',
         price: '$20.00',
         seller: 'The Ghost of Augustus',
-        offer: '17 offers'
+        offer: '17'
     },
     {
         id: 6,
         name: 'Social Hour',
-        image: '..public/images/socialhour.jpg',
+        image: 'images/socialhour.jpg',
         alt: 'Two roman soldiers conversing in a black and white photo.',
         condition: 'priceless',
         price: '$5.00 entry',
         seller: 'severus slices',
-        offer: '1364 offers'
+        offer: '1364'
     }
 ];
+
+exports.find = () => {
+    return items;
+}

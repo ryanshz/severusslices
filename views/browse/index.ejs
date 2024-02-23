@@ -1,4 +1,4 @@
-<%- include('partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
     <section>
         <div>
             <h2>shop</h2>
@@ -8,6 +8,27 @@
         </div>
     </section>
     <main id="items">
+        <% if(items.length){ %>
+            <% items.forEach(item => { %>
+                <a href="item.html" class="shop">
+                    <section class="vertical">
+                        <figure>
+                            <img src="<%= item.image %>" alt="<%= item.alt %>">
+                            <figcaption><%= item.condition %></figcaption>
+                        </figure>
+                        <div>
+                            <h2><%= item.name %></h2>
+                            <p><%= item.price %></p>
+                            <p><%= item.seller %></p>
+                            <p><%= item.offer %> offers</p>
+                        </div>
+                    </section>
+                </a>
+            <% }); %>
+        <% } else { %>
+            <p>no items found</p>
+        <% } %>
+        <!--
         <a href="item.html" class="shop">
             <section class="vertical">
                 <figure>
@@ -65,10 +86,7 @@
             </section>
         </a>
         <a href="item.html" class="shop">
-            <section class="vertical">
-                <figure>
-                    <img src="../../images/facelesspie.jpg" alt="Faceless Roman soldiers standing behind a pizza.">
-                    <figcaption>perfect condition</figcaption>
+            <section class="vertical">offers condition</figcaption>
                 </figure>
                 <div>
                     <h2>The Faceless Pie</h2>
@@ -91,6 +109,6 @@
                     <p>1364 offers</p>
                 </div>
             </section>
-        </a>
+        </a> -->
     </main>
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

@@ -1,5 +1,8 @@
+const model = require('../models/items');
+
 exports.index = (req, res) => {
-    res.render('items', { title: 'Items' });
+    let items = model.find();
+    res.render('browse/index.ejs', {items});
 }
 
 exports.view = (req, res) => {
