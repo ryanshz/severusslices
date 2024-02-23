@@ -1,5 +1,5 @@
 exports.index = (req, res) => {
-    res.send('items home')
+    res.render('items', { title: 'Items' });
 }
 
 exports.view = (req, res) => {

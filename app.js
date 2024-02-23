@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/items', require('./routes/itemRoutes'));
+app.use('/new', require('./routes/newRoutes'));
 
 app.listen(port, hostname, () => {
     console.log(`Server is running at http://${hostname}:${port}/`);
