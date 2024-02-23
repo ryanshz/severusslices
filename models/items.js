@@ -8,7 +8,8 @@ const items = [
         condition: 'perfect condition',
         price: '$1000.00',
         seller: 'The Roman Empire',
-        offer: '3'
+        offer: '3',
+        active: 'true'
     },
     { 
         id: '2', 
@@ -18,7 +19,8 @@ const items = [
         condition: 'good condition',
         price: '$300.00',
         seller: 'Emperor Nero',
-        offer: '0'
+        offer: '0',
+        active: 'true'
     },
     { 
         id: '3', 
@@ -28,7 +30,8 @@ const items = [
         condition: 'poor condition',
         price: 'Free with any purchase',
         seller: 'The Third Gallica',
-        offer: '6'
+        offer: '6',
+        active: 'true'
     },
     {
         id: '4',
@@ -38,7 +41,8 @@ const items = [
         condition: 'great condition',
         price: 'Negotiable',
         seller: 'Cicero Caesar',
-        offer: '1'
+        offer: '1',
+        active: 'true'
     },
     {
         id: '5',
@@ -48,7 +52,8 @@ const items = [
         condition: 'perfect condition',
         price: '$20.00',
         seller: 'The Ghost of Augustus',
-        offer: '17'
+        offer: '17',
+        active: 'true'
     },
     {
         id: '6',
@@ -58,7 +63,8 @@ const items = [
         condition: 'priceless',
         price: '$5.00 entry',
         seller: 'severus slices',
-        offer: '1364'
+        offer: '1364',
+        active: 'true'
     }
 ];
 
