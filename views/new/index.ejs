@@ -4,48 +4,42 @@
             <div>
                 <h2>sell</h2>
                 <p>if you wish to offer a service here at severus slices, feel free to do so below.
-                    please note that all items must be in good condition respective to the service, and that all services must
-                    fall within the severus slices terms of service. we will not accept any offers that are not in accordance 
+                    please note that all items must be in good condition respective to the service, and that all
+                    services must
+                    fall within the severus slices terms of service. we will not accept any offers that are not in
+                    accordance
                     with said terms.</p>
             </div>
         </section>
         <section>
-            <form action="#">
+            <form action='/items' method='POST'>
                 <div id="formhead">
                     <h2>create new item to sell</h2>
                     <sub>items with a * are required.</sub>
                 </div>
                 <p>
-                    <label for="firstname">*first name: </label>
-                    <input type="text" name="firstname" id="firstname" required class="forminput">
+                    <label for="name">*title: </label>
+                    <input type="text" name="name" id="name" required class="forminput">
                 </p>
                 <p>
-                    <label for="lastname">*last name: </label>
-                    <input type="text" name="lastname" id="lastname" required class="forminput">
-                </p>
-                <p>
-                    <label for="seller">seller: </label>
-                    <input type="text" name="seller" id="seller" class="forminput">
-                </p>
-                <p>
-                    <label for="title">*title: </label>
-                    <input type="text" name="title" id="title" required class="forminput">
+                    <label for="seller">*seller: </label>
+                    <input type="text" name="seller" id="seller" required class="forminput">
                 </p>
                 <p>
                     <label for="price">*price: </label>
                     <input type="text" name="price" id="price" required class="forminput">
                 </p>
                 <p>
-                    <label for="description">description: </label>
-                    <input type="text" name="description" id="description" class="forminput">
+                    <label for="image">*image: </label>
+                    <input type="file" name="image" required id="image">
                 </p>
                 <p>
-                    <label for="addimg">*image: </label>
-                    <input type="file" name="image" required id="addimg">
+                    <label for="alt">image description: </label>
+                    <input type="text" name="alt" id="alt" required class="forminput">
                 </p>
                 <p>
                     <label for="condition">*condition: </label>
-                    <select name="condition" id="condition">
+                    <select name="condition" id="condition" required>
                         <option value="select" selected disabled>select one</option>
                         <option value="perfect">perfect</option>
                         <option value="great">great</option>
@@ -54,8 +48,8 @@
                         <option value="horrid">horrid</option>
                     </select>
                 </p>
-                <input type="submit" value="submit" id="formsubmit">      
+                <input type="submit" value="submit" id="formsubmit">
             </form>
         </section>
     </main>
-<%- include('../partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>

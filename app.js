@@ -22,5 +22,4 @@ app.use('/new', newRoutes);
 
 app.listen(port, hostname, () => {
     console.log(`Server is running at http://${hostname}:${port}/`);
-    }
-);
+});

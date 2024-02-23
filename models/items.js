@@ -1,4 +1,5 @@
 const {DateTime} = require('luxon');
+const {v4: uuidv4} = require('uuid');
 const items = [
     { 
         id: '1', 
@@ -78,4 +79,11 @@ exports.findById = (id) => {
 
 exports.findByName = (name) => {
     return items.find(item => item.name === name);
+}
+
+exports.save = (item) => {
+    item.id = uuidv4();
+    item.active = 'true';
+    item.offer = '0';
+    items.push(item);
 }
