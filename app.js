@@ -1,6 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const itemRoutes = require('./routes/itemRoutes');
+const newRoutes = require('./routes/newRoutes');
+
 const app = express();
 let port = 3000;
 let hostname = 'localhost';
@@ -14,8 +17,8 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'Home' });
 });
 
-app.use('/items', require('./routes/itemRoutes'));
-app.use('/new', require('./routes/newRoutes'));
+app.use('/items', itemRoutes);
+app.use('/new', newRoutes);
 
 app.listen(port, hostname, () => {
     console.log(`Server is running at http://${hostname}:${port}/`);

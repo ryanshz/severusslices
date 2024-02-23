@@ -10,7 +10,7 @@
     <main id="items">
         <% if(items.length){ %>
             <% items.forEach(item => { %>
-                <a href="item.html" class="shop">
+                <a href="/items/<%= item.id %>" class="shop">
                     <section class="vertical">
                         <figure>
                             <img src="<%= item.image %>" alt="<%= item.alt %>">

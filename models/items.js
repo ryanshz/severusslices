@@ -1,7 +1,7 @@
 const {DateTime} = require('luxon');
 const items = [
     { 
-        id: 1, 
+        id: '1', 
         name: 'The Roman Pizza Banquet',
         image: 'images/pizzabanquet.JPG',
         alt: 'Roman soldiers eating pizzas in a dining hall.',
@@ -11,7 +11,7 @@ const items = [
         offer: '3'
     },
     { 
-        id: 2, 
+        id: '2', 
         name: 'The Bath of Pizza',
         image: 'images/pizzabath.JPG',
         alt: 'A roman soldier bathing in pizza.',
@@ -21,7 +21,7 @@ const items = [
         offer: '0'
     },
     { 
-        id: 3, 
+        id: '3', 
         name: 'Free Conquest',
         image: 'images/freeconquest.JPG',
         alt: 'Roman soldiers conquering a local Dominos.',
@@ -31,7 +31,7 @@ const items = [
         offer: '6'
     },
     {
-        id: 4,
+        id: '4',
         name: 'Pizza Hit',
         image: 'images/pizzahit.jpg',
         alt: 'A shirtless man, and a man with a hood holding a pizza.',
@@ -41,7 +41,7 @@ const items = [
         offer: '1'
     },
     {
-        id: 5,
+        id: '5',
         name: 'The Faceless Pie',
         image: 'images/facelesspie.jpg',
         alt: 'Faceless Roman soldiers standing behind a pizza.',
@@ -51,7 +51,7 @@ const items = [
         offer: '17'
     },
     {
-        id: 6,
+        id: '6',
         name: 'Social Hour',
         image: 'images/socialhour.jpg',
         alt: 'Two roman soldiers conversing in a black and white photo.',
@@ -64,4 +64,12 @@ const items = [
 
 exports.find = () => {
     return items;
+}
+
+exports.findById = (id) => {
+    return items.find(item => item.id === id);
+}
+
+exports.findByName = (name) => {
+    return items.find(item => item.name === name);
 }

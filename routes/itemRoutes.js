@@ -6,6 +6,6 @@ const controller = require('../controllers/itemctrl.js');
 router.get('/', controller.index);
 
 //view item
-router.get('/:id', controller.view);
+router.get('/:id', controller.show);
 
 module.exports = router;

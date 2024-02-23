@@ -1,72 +1,42 @@
-<%- include('partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
     <main>
         <section class="currentitem">
             <figure>
-                <img src="../../images/pizzabanquet.JPG" alt="Roman soldiers eating pizzas in a dining hall.">
+                <img src="/<%= item.image %>" alt="<%= item.alt %>">
             </figure>
             <div class="currentitemdiv">
-                <h2>The Roman Pizza Banquet</h2>
+                <h2><%= item.name %></h2>
                 <div>
-                    <p>perfect condition</p>
-                    <p>$1000.00</p>
-                    <p>The Roman Empire</p>
-                    <p>3 offers</p>
+                    <p><%= item.condition %></p>
+                    <p><%= item.price %></p>
+                    <p><%= item.seller %></p>
+                    <p><%= item.offer %> offers</p>
                     <br>
                     <a class="buy" href="#">offer</a>
                     <a class="buy" href="#">buyout</a>
                 </div>
-            </div>
-            <div id="deleditcolumn">
-                <a class="edit" href="#">edit</a>
-                <a class="edit" href="#">del</a>
             </div>
         </section>
         <section id="itemfix">
             <h2>other offers you may be interested in:</h2>
         </section>
         <div id="items">
-            <a href="item.html" class="shop">
-                <section class="vertical">
-                    <figure>
-                        <img src="../../images/freeconquest.JPG" alt="Roman soldiers conquering a local Domino's.">
-                        <figcaption>poor condition</figcaption>
-                    </figure>
-                    <div>
-                        <h2>Free Conquest</h2>
-                        <p>Free with any purchase</p>
-                        <p>The Third Gallica</p>
-                        <p>6 offers</p>
-                    </div>
-                </section>
-            </a>
-            <a href="item.html" class="shop">
-                <section class="vertical">
-                    <figure>
-                        <img src="../../images/pizzabath.JPG" alt="A roman soldier bathing in pizza.">
-                        <figcaption>good condition</figcaption>
-                    </figure>
-                    <div>
-                        <h2>The Bath of Pizza</h2>
-                        <p>$300.00</p>
-                        <p>Emperor Nero</p>
-                        <p>0 offers</p>
-                    </div>
-                </section>
-            </a>
-            <a href="item.html" class="shop">
-                <section class="vertical">
-                    <figure>
-                        <img src="../../images/pizzahit.jpg" alt="A shirtless man, and a man with a hood holding a pizza.">
-                        <figcaption>great condition</figcaption>
-                    </figure>
-                    <div>
-                        <h2>Pizza Hit</h2>
-                        <p>Negotiable</p>
-                        <p>Cicero Caesar</p>
-                        <p>1 offer</p>
-                    </div>
-                </section>
-            </a>
+            <% items.slice(0, 3).forEach(item => { %>
+                <a href="/items/<%= item.id %>" class="shop">
+                    <section class="vertical">
+                        <figure>
+                            <img src="/<%= item.image %>" alt="<%= item.alt %>">
+                            <figcaption><%= item.condition %></figcaption>
+                        </figure>
+                        <div>
+                            <h2><%= item.name %></h2>
+                            <p><%= item.price %></p>
+                            <p><%= item.seller %></p>
+                            <p><%= item.offer %> offers</p>
+                        </div>
+                    </section>
+                </a>
+            <% }); %>
         </div>
     </main>
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
