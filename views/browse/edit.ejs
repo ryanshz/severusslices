@@ -1,0 +1,64 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <section>
+            <div>
+                <h2>edit</h2>
+                <p>make any necessary changes to your listing here. when finished,
+                    confirm your changes and you will be automatically redirected to your edited listing.</p>
+            </div>
+        </section>
+        <section>
+            <form id="sellform" action='/items/<%= item.id %>?_method=PUT' method='POST'>
+                <div id="formhead">
+                    <h2>current item</h2>
+                    <p>id: <%= item.id %></p>
+                    <sub>items with a * are required.</sub>
+                </div>
+                <p>
+                    <label for="name">*title: </label>
+                    <input type="text" name="name" id="name" required class="forminput" value="<%= item.name %>">
+                </p>
+                <p>
+                    <label for="seller">*seller: </label>
+                    <input type="text" name="seller" id="seller" required class="forminput" value="<%= item.seller %>">
+                </p>
+                <p>
+                    <label for="price">*price: </label>
+                    <input type="text" name="price" id="price" required class="forminput" value="<%= item.price %>">
+                </p>
+                <p>
+                    <label for="image">image: </label>
+                    <input type="file" name="image" id="image">
+                </p>
+                <p>
+                    <label for="alt">image description: </label>
+                    <input type="text" name="alt" id="alt" class="forminput" value="<%= item.name %>">
+                </p>
+                <p>
+                    <label for="offer">offers: </label>
+                    <input type="text" name="offer" id="offer" required class="forminput" value="<%= item.offer %>">
+                </p>
+                <p>
+                    <label for="active">*active: </label>
+                    <select name="active" id="active" required>
+                        <option value="select" selected disabled>select one</option>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="condition">*condition: (currently in <%= item.condition %>) </label>
+                    <select name="condition" id="condition" required>
+                        <option value="select" selected disabled>select one</option>
+                        <option value="perfect">perfect</option>
+                        <option value="great">great</option>
+                        <option value="good">good</option>
+                        <option value="poor">poor</option>
+                        <option value="horrid">horrid</option>
+                    </select>
+                </p>
+                <input type="submit" value="submit" id="formsubmit">
+            </form>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>

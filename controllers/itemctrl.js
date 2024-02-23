@@ -20,3 +20,26 @@ exports.create = (req, res) => {
     model.save(item);
     res.redirect('/items');
 }
+
+exports.edit = (req, res) => {
+    let item = model.findById(req.params.id);
+    if (item) {
+        res.render('browse/edit.ejs', {item});
+    }
+    res.status(404).send('Item not found with id ' + req.params.id);
+}
+
+exports.update = (req, res) => {
+    let item = req.body;
+    model.update(item);
+    res.redirect('/items');
+}
+
+exports.delete = (req, res) => {
+    let item = model.findById(req.params.id);
+    if (item) {
+        item.active = 'false';
+        res.redirect('/items');
+    }
+    res.status(404).send('Item not found with id ' + req.params.id);
+}

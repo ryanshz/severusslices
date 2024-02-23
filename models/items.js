@@ -87,3 +87,8 @@ exports.save = (item) => {
     item.offer = '0';
     items.push(item);
 }
+
+exports.update = (item) => {
+    const index = items.findIndex(i => i.id === item.id);
+    items[index] = item;
+}

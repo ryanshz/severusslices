@@ -210,17 +210,17 @@ nav>ul>li>a:hover{
     justify-content:flex-start;
     gap:.3rem;
 }
-form{
+#sellform{
     display:table;
 }
 #formhead{
     display: table-caption;
     margin-bottom: 1.5rem;
 }
-form>p{
+#sellform>p{
     display:table-row;
 }
-form>p>label{
+#sellform>p>label{
     display:table-cell;
     font-size: 1rem;
     color: var(--font);
@@ -231,7 +231,7 @@ form>p>label{
     margin: 1rem 0;
     font-size: 1rem;
 }
-#addimg, .forminput, form>p>select{
+#addimg, .forminput, #sellform>p>select{
     margin-left:2rem;
 }
 .forminput{
@@ -242,7 +242,6 @@ form>p>label{
     background-color: var(--font);
     color: #000;
     font-size: 1rem;
-    
 }
 .forminput:focus{
     outline: none;
@@ -259,7 +258,7 @@ form>p>label{
     font-size: 1rem;
     box-shadow: 2px 2px 5px var(--body);
 }
-form>p>select{
+#sellform>p>select{
     display:table-cell;
     border: 2px solid var(--border);
     border-radius: 1rem;
@@ -267,4 +266,8 @@ form>p>select{
     background-color: var(--font);
     color: #000;
     font-size: 1rem;
+}
+#image{
+    padding: 1rem;
+    margin-left: 1.2rem;
 }
