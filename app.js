@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 const itemRoutes = require('./routes/itemRoutes');
 const newRoutes = require('./routes/newRoutes');
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs');
 app.use(morgan('tiny'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' });

@@ -88,7 +88,33 @@ exports.save = (item) => {
     items.push(item);
 }
 
-exports.update = (item) => {
-    const index = items.findIndex(i => i.id === item.id);
-    items[index] = item;
+exports.updateById = (id, newItem) => {
+    let item = items.find(item => item.id === id);
+    if(item){
+        item.name = newItem.name;
+        if(newItem.image){
+            item.image = newItem.image;
+        }
+        if(newItem.alt){
+            item.alt = newItem.alt;
+        }
+        item.condition = newItem.condition;
+        item.price = newItem.price;
+        item.seller = newItem.seller;
+        item.offer = newItem.offer;
+        item.active = newItem.active;
+        return true;
+    }else{
+        return false;
+    }
+}
+
+exports.deleteById = (id) => {
+    let item = items.find(item => item.id === id);
+    if(item){
+        item.active = 'false';
+        return true;
+    }else{
+        return false;
+    }
 }
