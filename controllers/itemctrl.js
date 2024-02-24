@@ -5,6 +5,7 @@ exports.index = (req, res, next) => {
     let items = model.find({ active: 'true' });
     if (items) {
         let activeItems = items.filter(item => item.active === 'true');
+        activeItems.sort((a, b) => a.price - b.price); // Sort items by price
         res.render('browse/index.ejs', { items: activeItems });
     } else {
         let err = new Error('No items found!');

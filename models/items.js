@@ -7,7 +7,7 @@ const items = [
         image: 'images/pizzabanquet.JPG',
         alt: 'Roman soldiers eating pizzas in a dining hall.',
         condition: 'perfect condition',
-        price: '$1000.00',
+        price: 1000.00,
         seller: 'The Roman Empire',
         offer: '3',
         active: 'true'
@@ -18,18 +18,18 @@ const items = [
         image: 'images/pizzabath.JPG',
         alt: 'A roman soldier bathing in pizza.',
         condition: 'good condition',
-        price: '$300.00',
+        price: 300.00,
         seller: 'Emperor Nero',
         offer: '0',
         active: 'true'
     },
     { 
         id: '3', 
-        name: 'Free Conquest',
+        name: 'Free Conquest WITH any purchase!',
         image: 'images/freeconquest.JPG',
         alt: 'Roman soldiers conquering a local Dominos.',
         condition: 'poor condition',
-        price: 'Free with any purchase',
+        price: 0,
         seller: 'The Third Gallica',
         offer: '6',
         active: 'true'
@@ -40,7 +40,7 @@ const items = [
         image: 'images/pizzahit.jpg',
         alt: 'A shirtless man, and a man with a hood holding a pizza.',
         condition: 'great condition',
-        price: 'Negotiable',
+        price: null,
         seller: 'Cicero Caesar',
         offer: '1',
         active: 'true'
@@ -51,7 +51,7 @@ const items = [
         image: 'images/facelesspie.jpg',
         alt: 'Faceless Roman soldiers standing behind a pizza.',
         condition: 'perfect condition',
-        price: '$20.00',
+        price: 20.00,
         seller: 'The Ghost of Augustus',
         offer: '17',
         active: 'true'
@@ -62,7 +62,7 @@ const items = [
         image: 'images/socialhour.jpg',
         alt: 'Two roman soldiers conversing in a black and white photo.',
         condition: 'priceless',
-        price: '$5.00 entry',
+        price: 5.00,
         seller: 'severus slices',
         offer: '1364',
         active: 'true'

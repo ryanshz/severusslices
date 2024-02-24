@@ -18,7 +18,11 @@
                         </figure>
                         <div>
                             <h2><%= item.name %></h2>
-                            <p><%= item.price %></p>
+                            <% if(item.price !== null){ %>
+                                <p>$<%= item.price %>.00</p>
+                            <% } else { %>
+                                <p>Negotiable</p>
+                            <% } %>
                             <p><%= item.seller %></p>
                             <p><%= item.offer %> offers</p>
                         </div>
