@@ -25,7 +25,13 @@ app.get('/', (req, res) => {
 app.use('/items', itemRoutes);
 app.use('/new', newRoutes);
 
-//error handler
+//error handlers
+app.use((req, res, next) => {
+    let err = new Error('Page not found!');
+    err.status = 404;
+    next(err);
+});
+
 app.use((err, req, res, next) => {
     console.log(err.stack);
     if(!err.status){

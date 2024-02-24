@@ -1,26 +1,29 @@
 const model = require('../models/items');
 
 //open item catalog
-exports.index = (req, res) => {
+exports.index = (req, res, next) => {
     let items = model.find({ active: 'true' });
-    console.log(items);
     if (items) {
         let activeItems = items.filter(item => item.active === 'true');
         res.render('browse/index.ejs', { items: activeItems });
     } else {
-        res.status(404).send('No items found.');
+        let err = new Error('No items found!');
+        err.status = 404;
+        next(err);
     }
 }
 
 //open specific item page
-exports.show = (req, res) => {
+exports.show = (req, res, next) => {
     let id = req.params.id;
     let items = model.find();
     let item = model.findById(id);
     if (item) {
         res.render('browse/item.ejs', {item, items});
     }else{
-        res.status(404).send('Item not found with id ' + id);
+        let err = new Error('Item not found with id ' + id);
+        err.status = 404;
+        next(err);
     }
 }
 
@@ -33,34 +36,40 @@ exports.create = (req, res) => {
 }
 
 //edit item
-exports.edit = (req, res) => {
+exports.edit = (req, res, next) => {
     let id = req.params.id;
     let item = model.findById(id);
     if (item) {
         res.render('browse/edit.ejs', {item});
     }else{
-        res.status(404).send('Item not found with id ' + id);
+        let err = new Error('Item not found with id ' + id);
+        err.status = 404;
+        next(err);
     }
 }
 
 //update current item with edited one
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
     let newItem = req.body;
     let id = req.params.id;
     console.log(newItem)
     if(model.updateById(id, newItem)){
         res.redirect('/items/' + id);
     }else{
-        res.status(404).send('Item not found with id ' + id);
+        let err = new Error('Item not found with id ' + id);
+        err.status = 404;
+        next(err);
     }
 }
 
 //delete item
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
     let id = req.params.id;
     if(model.deleteById(id)){
         res.redirect('/items');
     }else{
-        res.status(404).send('Item not found with id ' + id);
+        let err = new Error('Item not found with id ' + id);
+        err.status = 404;
+        next(err);
     }
 }
