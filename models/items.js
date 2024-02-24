@@ -101,7 +101,6 @@ exports.updateById = (id, newItem) => {
         item.condition = newItem.condition;
         item.seller = newItem.seller;
         item.offer = newItem.offer;
-        item.active = newItem.active;
         return true;
     } else {
         return false;

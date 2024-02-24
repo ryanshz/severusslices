@@ -33,11 +33,16 @@ exports.show = (req, res, next) => {
 exports.create = (req, res) => {
     let item = req.body;
     console.log(item);
-    if (req.file) {
-        item.image = req.file.filename;
+    try{
+        if (req.file) {
+            item.image = '/images/uploads/'+req.file.filename;
+        }
+        model.save(item);
+        res.redirect('/items');
+    } catch (err) {
+        console.log('could not make item,', err);
+        next(err);
     }
-    model.save(item);
-    res.redirect('/items');
 }
 
 //edit item
@@ -57,6 +62,9 @@ exports.edit = (req, res, next) => {
 exports.update = (req, res, next) => {
     let newItem = req.body;
     let id = req.params.id;
+    if(req.file){
+        newItem.image = '/images/uploads/'+req.file.filename;
+    }
     console.log(newItem)
     if (model.updateById(id, newItem)) {
         res.redirect('/items/' + id);
