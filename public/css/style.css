@@ -271,3 +271,9 @@ nav>ul>li>a:hover{
     padding: 1rem;
     margin-left: 1.2rem;
 }
+#errormain{
+    display: flex;
+}
+#errorfig{
+    text-align: center;
+}
