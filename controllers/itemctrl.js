@@ -17,6 +17,7 @@ exports.index = (req, res, next) => {
 //open specific item page
 exports.show = (req, res, next) => {
     let id = req.params.id;
+    console.log(id)
     let items = model.find();
     let item = model.findById(id);
     if (item) {
@@ -32,6 +33,9 @@ exports.show = (req, res, next) => {
 exports.create = (req, res) => {
     let item = req.body;
     console.log(item);
+    if (req.file) {
+        item.image = req.file.filename;
+    }
     model.save(item);
     res.redirect('/items');
 }
