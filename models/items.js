@@ -1,8 +1,8 @@
-const {DateTime} = require('luxon');
-const {v4: uuidv4} = require('uuid');
+const { DateTime } = require('luxon');
+const { v4: uuidv4 } = require('uuid');
 const items = [
-    { 
-        id: '1', 
+    {
+        id: '1',
         name: 'The Roman Pizza Banquet',
         image: '/images/pizzabanquet.JPG',
         alt: 'Roman soldiers eating pizzas in a dining hall.',
@@ -12,8 +12,8 @@ const items = [
         offer: '3',
         active: 'true'
     },
-    { 
-        id: '2', 
+    {
+        id: '2',
         name: 'The Bath of Pizza',
         image: '/images/pizzabath.JPG',
         alt: 'A roman soldier bathing in pizza.',
@@ -23,8 +23,8 @@ const items = [
         offer: '0',
         active: 'true'
     },
-    { 
-        id: '3', 
+    {
+        id: '3',
         name: 'Free Conquest WITH any purchase!',
         image: '/images/freeconquest.JPG',
         alt: 'Roman soldiers conquering a local Dominos.',
@@ -77,10 +77,6 @@ exports.findById = (id) => {
     return items.find(item => item.id === id);
 }
 
-exports.findByName = (name) => {
-    return items.find(item => item.name === name);
-}
-
 exports.save = (item) => {
     item.id = uuidv4();
     item.active = 'true';
@@ -90,31 +86,35 @@ exports.save = (item) => {
 
 exports.updateById = (id, newItem) => {
     let item = items.find(item => item.id === id);
-    if(item){
-        item.name = newItem.name;
-        if(newItem.image){
+    if (item) {
+        if (newItem.image) { //if new image put in thing
             item.image = newItem.image;
         }
-        if(newItem.alt){
+        if (newItem.alt) { //if new alt put in thing
             item.alt = newItem.alt;
         }
+        if(newItem.price === null){
+            item.price = null;
+        }else{
+            item.price = newItem.price;
+        }
+        item.name = newItem.name;
         item.condition = newItem.condition;
-        item.price = newItem.price;
         item.seller = newItem.seller;
         item.offer = newItem.offer;
         item.active = newItem.active;
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
 exports.deleteById = (id) => {
     let item = items.find(item => item.id === id);
-    if(item){
+    if (item) {
         item.active = 'false';
         return true;
-    }else{
+    } else {
         return false;
     }
 }

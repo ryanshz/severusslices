@@ -4,8 +4,8 @@ const model = require('../models/items');
 exports.index = (req, res, next) => {
     let items = model.find({ active: 'true' });
     if (items) {
-        let activeItems = items.filter(item => item.active === 'true');
-        activeItems.sort((a, b) => a.price - b.price);
+        let activeItems = items.filter(item => item.active === 'true'); //only show active items
+        activeItems.sort((a, b) => a.price - b.price); //sort by price
         res.render('browse/index.ejs', { items: activeItems });
     } else {
         let err = new Error('No items found!');
@@ -20,8 +20,8 @@ exports.show = (req, res, next) => {
     let items = model.find();
     let item = model.findById(id);
     if (item) {
-        res.render('browse/item.ejs', {item, items});
-    }else{
+        res.render('browse/item.ejs', { item, items });
+    } else {
         let err = new Error('Item not found with id ' + id);
         err.status = 404;
         next(err);
@@ -29,7 +29,7 @@ exports.show = (req, res, next) => {
 }
 
 //make new item
-exports.create = (req, res) => { 
+exports.create = (req, res) => {
     let item = req.body;
     console.log(item);
     model.save(item);
@@ -41,8 +41,8 @@ exports.edit = (req, res, next) => {
     let id = req.params.id;
     let item = model.findById(id);
     if (item) {
-        res.render('browse/edit.ejs', {item});
-    }else{
+        res.render('browse/edit.ejs', { item });
+    } else {
         let err = new Error('Item not found with id ' + id);
         err.status = 404;
         next(err);
@@ -54,9 +54,9 @@ exports.update = (req, res, next) => {
     let newItem = req.body;
     let id = req.params.id;
     console.log(newItem)
-    if(model.updateById(id, newItem)){
+    if (model.updateById(id, newItem)) {
         res.redirect('/items/' + id);
-    }else{
+    } else {
         let err = new Error('Item not found with id ' + id);
         err.status = 404;
         next(err);
@@ -66,9 +66,9 @@ exports.update = (req, res, next) => {
 //delete item
 exports.delete = (req, res, next) => {
     let id = req.params.id;
-    if(model.deleteById(id)){
+    if (model.deleteById(id)) {
         res.redirect('/items');
-    }else{
+    } else {
         let err = new Error('Item not found with id ' + id);
         err.status = 404;
         next(err);
@@ -81,7 +81,7 @@ exports.search = (req, res, next) => {
     let items = model.find({ active: 'true' });
     if (items) {
         let activeItems = items.filter(item => item.active === 'true');
-        let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+        let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())); //converts to lowercase and checks if search in name
         searchItems.sort((a, b) => a.price - b.price);
         res.render('browse/search.ejs', { items: searchItems });
     } else {
