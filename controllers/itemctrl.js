@@ -5,7 +5,7 @@ exports.index = (req, res, next) => {
     let items = model.find({ active: 'true' });
     if (items) {
         let activeItems = items.filter(item => item.active === 'true');
-        activeItems.sort((a, b) => a.price - b.price); // Sort items by price
+        activeItems.sort((a, b) => a.price - b.price);
         res.render('browse/index.ejs', { items: activeItems });
     } else {
         let err = new Error('No items found!');
@@ -70,6 +70,22 @@ exports.delete = (req, res, next) => {
         res.redirect('/items');
     }else{
         let err = new Error('Item not found with id ' + id);
+        err.status = 404;
+        next(err);
+    }
+}
+
+//search items
+exports.search = (req, res, next) => {
+    let search = req.query.search;
+    let items = model.find({ active: 'true' });
+    if (items) {
+        let activeItems = items.filter(item => item.active === 'true');
+        let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+        searchItems.sort((a, b) => a.price - b.price);
+        res.render('browse/search.ejs', { items: searchItems });
+    } else {
+        let err = new Error('No items found!');
         err.status = 404;
         next(err);
     }

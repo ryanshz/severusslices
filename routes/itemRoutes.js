@@ -7,6 +7,9 @@ const upload = multer({dest: 'public/images/uploads/'});
 //home page
 router.get('/', controller.index);
 
+//search item
+router.get('/search', controller.search);
+
 //view item
 router.get('/:id', controller.show);
 

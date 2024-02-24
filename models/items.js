@@ -4,7 +4,7 @@ const items = [
     { 
         id: '1', 
         name: 'The Roman Pizza Banquet',
-        image: 'images/pizzabanquet.JPG',
+        image: '/images/pizzabanquet.JPG',
         alt: 'Roman soldiers eating pizzas in a dining hall.',
         condition: 'perfect condition',
         price: 1000.00,
@@ -15,7 +15,7 @@ const items = [
     { 
         id: '2', 
         name: 'The Bath of Pizza',
-        image: 'images/pizzabath.JPG',
+        image: '/images/pizzabath.JPG',
         alt: 'A roman soldier bathing in pizza.',
         condition: 'good condition',
         price: 300.00,
@@ -26,7 +26,7 @@ const items = [
     { 
         id: '3', 
         name: 'Free Conquest WITH any purchase!',
-        image: 'images/freeconquest.JPG',
+        image: '/images/freeconquest.JPG',
         alt: 'Roman soldiers conquering a local Dominos.',
         condition: 'poor condition',
         price: 0,
@@ -37,7 +37,7 @@ const items = [
     {
         id: '4',
         name: 'Pizza Hit',
-        image: 'images/pizzahit.jpg',
+        image: '/images/pizzahit.jpg',
         alt: 'A shirtless man, and a man with a hood holding a pizza.',
         condition: 'great condition',
         price: null,
@@ -48,7 +48,7 @@ const items = [
     {
         id: '5',
         name: 'The Faceless Pie',
-        image: 'images/facelesspie.jpg',
+        image: '/images/facelesspie.jpg',
         alt: 'Faceless Roman soldiers standing behind a pizza.',
         condition: 'perfect condition',
         price: 20.00,
@@ -59,7 +59,7 @@ const items = [
     {
         id: '6',
         name: 'Social Hour',
-        image: 'images/socialhour.jpg',
+        image: '/images/socialhour.jpg',
         alt: 'Two roman soldiers conversing in a black and white photo.',
         condition: 'priceless',
         price: 5.00,
