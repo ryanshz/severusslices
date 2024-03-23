@@ -19,6 +19,10 @@
                     <input type="text" name="name" id="name" required class="forminput" value="<%= item.name %>">
                 </p>
                 <p>
+                    <label for="name">*item details: </label>
+                    <input type="text" name="details" id="details" required class="forminput" value="<%= item.details %>">
+                </p>
+                <p>
                     <label for="seller">*seller: </label>
                     <input type="text" name="seller" id="seller" required class="forminput" value="<%= item.seller %>">
                 </p>
@@ -32,11 +36,11 @@
                 </p>
                 <p>
                     <label for="alt">image description: </label>
-                    <input type="text" name="alt" id="alt" class="forminput" value="<%= item.name %>">
+                    <input type="text" name="alt" id="alt" class="forminput" value="<%= item.alt %>">
                 </p>
                 <p>
                     <label for="offer">offers: </label>
-                    <input type="text" name="offer" id="offer" required class="forminput" value="<%= item.offer %>">
+                    <input type="number" name="offer" id="offer" required class="forminput" value="<%= item.offer %>">
                 </p>
                 <p>
                     <label for="condition">*condition: (currently in <%= item.condition %>) </label>

@@ -14,6 +14,7 @@
                         <p>Negotiable</p>
                     <% } %>
                     <p><%= item.seller %></p>
+                    <p><%= item.details %></p>
                     <p><%= item.offer %> offers</p>
                     <br>
                     <a class="buy" href="#">offer</a>
@@ -30,7 +31,7 @@
         </section>
         <div id="items">
             <% if(items.length){ %>
-                <% items.forEach(item => { %>
+                <% items.splice(0,3).forEach(item => { %>
                     <a href="/items/<%= item.id %>" class="shop">
                         <section class="vertical">
                             <figure>

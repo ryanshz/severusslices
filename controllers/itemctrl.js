@@ -2,7 +2,7 @@ const model = require('../models/items');
 
 //open item catalog
 exports.index = (req, res, next) => {
-    model.find()
+    model.find({ active: 'true' })
         .then(items => {
             items.sort((a, b) => a.price - b.price); //sort by price
             res.render('browse/index.ejs', { items });
@@ -26,8 +26,11 @@ exports.show = (req, res, next) => {
     model.findById(id)
         .then(item => {
             if (item) {
-                let items = model.find();
-                res.render('browse/item.ejs', { item, items });
+                model.find({ active: 'true' })
+                    .then(allItems => {
+                        res.render('browse/item.ejs', { item, items: allItems });
+                    })
+                    .catch(err => next(err));
             } else {
                 let err = new Error('Item not found with id ' + id);
                 err.status = 404;
@@ -140,14 +143,21 @@ exports.delete = (req, res, next) => {
 exports.search = (req, res, next) => {
     let search = req.query.search;
     let items = model.find({ active: 'true' });
-    if (items) {
-        let activeItems = items.filter(item => item.active === 'true');
-        let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())); //converts to lowercase and checks if search in name
-        searchItems.sort((a, b) => a.price - b.price);
-        res.render('browse/search.ejs', { items: searchItems });
+
+    if (search.length === 0) {
+        res.render('browse/search.ejs', { items: [] });
     } else {
-        let err = new Error('No items found!');
-        err.status = 404;
-        next(err);
+        model.find({ active: 'true' })
+            .then(items => {
+                let activeItems = items.filter(item => item.active === 'true');
+                let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())); //converts to lowercase and checks if search in name
+                searchItems.sort((a, b) => a.price - b.price);
+                res.render('browse/search.ejs', { items: searchItems });
+            })
+            .catch(err => {
+                err = new Error('No items found!');
+                err.status = 404;
+                next(err);
+            });
     }
 }
