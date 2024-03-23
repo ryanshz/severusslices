@@ -1,118 +1,17 @@
-const { v4: uuid } = require('uuid');
-const items = [
-    {
-        id: '1',
-        name: 'The Roman Pizza Banquet',
-        image: '/images/pizzabanquet.JPG',
-        alt: 'Roman soldiers eating pizzas in a dining hall.',
-        condition: 'perfect condition',
-        price: 1000.00,
-        seller: 'The Roman Empire',
-        offer: '3',
-        active: 'true'
-    },
-    {
-        id: '2',
-        name: 'The Bath of Pizza',
-        image: '/images/pizzabath.JPG',
-        alt: 'A roman soldier bathing in pizza.',
-        condition: 'good condition',
-        price: 300.00,
-        seller: 'Emperor Nero',
-        offer: '0',
-        active: 'true'
-    },
-    {
-        id: '3',
-        name: 'Free Conquest WITH any purchase!',
-        image: '/images/freeconquest.JPG',
-        alt: 'Roman soldiers conquering a local Dominos.',
-        condition: 'poor condition',
-        price: 0,
-        seller: 'The Third Gallica',
-        offer: '6',
-        active: 'true'
-    },
-    {
-        id: '4',
-        name: 'Pizza Hit',
-        image: '/images/pizzahit.jpg',
-        alt: 'A shirtless man, and a man with a hood holding a pizza.',
-        condition: 'great condition',
-        price: null,
-        seller: 'Cicero Caesar',
-        offer: '1',
-        active: 'true'
-    },
-    {
-        id: '5',
-        name: 'The Faceless Pie',
-        image: '/images/facelesspie.jpg',
-        alt: 'Faceless Roman soldiers standing behind a pizza.',
-        condition: 'perfect condition',
-        price: 20.00,
-        seller: 'The Ghost of Augustus',
-        offer: '17',
-        active: 'true'
-    },
-    {
-        id: '6',
-        name: 'Social Hour',
-        image: '/images/socialhour.jpg',
-        alt: 'Two roman soldiers conversing in a black and white photo.',
-        condition: 'priceless',
-        price: 5.00,
-        seller: 'severus slices',
-        offer: '1364',
-        active: 'true'
-    }
-];
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-exports.find = () => {
-    return items;
-}
+const itemSchema = new Schema({
+    name: { type: String, required: [true, 'Name is required'] },
+    image: { type: String, required: [true, 'Image is required'] },
+    alt: { type: String, required: [true, 'Alt is required'] },
+    condition: { type: String, required: [true, 'Condition is required'] },
+    price: { type: Number, required: [true, 'Price is required'] },
+    seller: { type: String, required: [true, 'Seller is required'] },
+    offer: { type: Number },
+    active: { type: String }
+},
+    { timestamps: true }
+);
 
-exports.findById = (id) => {
-    return items.find(item => item.id === id);
-}
-
-exports.save = (item) => {
-    item.id = uuid();
-    item.active = 'true';
-    item.offer = '0';
-    items.push(item);
-}
-
-exports.updateById = (id, newItem) => {
-    let item = items.find(item => item.id === id);
-    if (item) {
-        if (newItem.image) { //if new image put in thing
-            item.image = newItem.image;
-        }
-        if (newItem.alt) { //if new alt put in thing
-            item.alt = newItem.alt;
-        }
-        if(newItem.price === null){
-            item.price = null;
-        }else{
-            item.price = newItem.price;
-        }
-        item.name = newItem.name;
-        item.condition = newItem.condition;
-        item.seller = newItem.seller;
-        item.offer = newItem.offer;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-exports.deleteById = (id) => {
-    let item = items.find(item => item.id === id);
-    if (item) {
-        item.active = 'false';
-        return true;
-    } else {
-        return false;
-    }
-}
+module.exports = mongoose.model('Item', itemSchema);
