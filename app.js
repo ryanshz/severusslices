@@ -11,7 +11,7 @@ const newRoutes = require('./routes/newRoutes');
 const app = express();
 let port = 3000;
 let hostname = 'localhost';
-let url = 'mongodb://localhost:27017/severusslices';
+let url = 'mongodb+srv://ryanshz:6RLpb8kXMm3SepsI@rscharlotte.tltbepr.mongodb.net/severusslices?retryWrites=true&w=majority&appName=rscharlotte';
 app.set('view engine', 'ejs');
 
 //db connection
