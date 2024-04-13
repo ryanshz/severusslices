@@ -13,7 +13,7 @@
                     <% } else { %>
                         <p>Negotiable</p>
                     <% } %>
-                    <p><%= item.seller %></p>
+                    <p><%= item.seller.firstName+' '+item.seller.lastName %></</p>
                     <p><%= item.details %></p>
                     <p><%= item.offer %> offers</p>
                     <br>
@@ -21,10 +21,12 @@
                     <a class="buy" href="#">buyout</a>
                 </div>
             </div>
-            <form id="deleditcolumn">
-                <button type="submit" formmethod="GET" class="edit" formaction="<%= item.id %>/edit">edit</a>
-                <button type="submit" formmethod="POST" class="edit" formaction="<%= item.id %>?_method=DELETE">del</a>
-            </form>
+            <% if(user == item.seller._id){ %>
+                <form id="deleditcolumn">
+                    <button type="submit" formmethod="GET" class="edit" formaction="<%= item.id %>/edit">edit</a>
+                    <button type="submit" formmethod="POST" class="edit" formaction="<%= item.id %>?_method=DELETE">del</a>
+                </form>
+            <% } %>
         </section>
         <section id="itemfix">
             <h2>other offers you may be interested in:</h2>
@@ -45,7 +47,7 @@
                                 <% } else { %>
                                     <p>Negotiable</p>
                                 <% } %>
-                                <p><%= item.seller %></p>
+                                <p><%= item.seller.firstName+' '+item.seller.lastName %></</p>
                                 <p><%= item.offer %> offers</p>
                             </div>
                         </section>

@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/userctrl.js');
+const { isGuest, isLoggedIn } = require('../middleware/auth.js');
 
-router.get('/signup', controller.signup);
+router.get('/signup', isGuest, controller.signup);
 
-router.post('/', controller.create);
+router.post('/', isGuest, controller.create);
 
-router.get('/login', controller.login);
+router.get('/login', isGuest, controller.login);
 
-router.post('/login', controller.authenticate);
+router.post('/login', isGuest, controller.authenticate);
 
-router.get('/profile', controller.profile);
+router.get('/profile', isLoggedIn, controller.profile);
 
-router.get('/logout', controller.logout);
+router.get('/logout', isLoggedIn, controller.logout);
 
 module.exports = router;

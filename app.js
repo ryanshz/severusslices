@@ -40,12 +40,12 @@ app.use(session({
     secret: 'lWwt6Eg0QenTUKvmtRf762DbCMaDiggw',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 4*60*60*1000 },
-    store: new mongoStore({ mongoUrl: url })
+    store: new mongoStore({ mongoUrl: url }),
+    cookie: { maxAge: 4*60*60*1000 }
 }));
 app.use(flash());
 app.use((req, res, next) => {
-    console.log(req.session);
+    res.locals.user = req.session.user||null;
     res.locals.successMessages = req.flash('success');
     res.locals.errorMessages = req.flash('error');
     next();

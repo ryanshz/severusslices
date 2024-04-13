@@ -1,4 +1,5 @@
 const model = require('../models/users');
+const Items = require('../models/items');
 
 exports.signup = (req, res) => {
     res.render('./users/signup.ejs');
@@ -57,9 +58,10 @@ exports.authenticate = (req, res, next) => {
 
 exports.profile = (req, res) => {
     let id = req.session.user;
-    model.findById(id)
-        .then(user => {
-            res.render('users/profile.ejs', { user: user });
+    Promise.all([model.findById(id), Items.find({seller:id})])
+        .then(results => {
+            const [user, items] = results;
+            res.render('users/profile.ejs', { user, items });
         })
         .catch(err => next(err));
 }

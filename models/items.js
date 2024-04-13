@@ -8,7 +8,7 @@ const itemSchema = new Schema({
     alt: { type: String, required: [true, 'Alt is required'] },
     condition: { type: String, required: [true, 'Condition is required'] },
     price: { type: Number, required: [true, 'Price is required'] },
-    seller: { type: String, required: [true, 'Seller is required'] },
+    seller: { type: Schema.Types.ObjectId, ref: 'User'},
     offer: { type: Number },
     active: { type: String }
 },

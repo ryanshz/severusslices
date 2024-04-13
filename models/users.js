@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({
     firstName: { type: String, required: [true, 'first name required'] },
     lastName: { type: String, required: [true, 'last name required'] },
-    email: { type: String, required: [true, 'email required'], unique: true},
+    email: { type: String, required: [true, 'email required'], unique: [true, 'email already exists']},
     password: { type: String, required: [true, 'password required'] },
 });
 
@@ -21,7 +21,8 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function(loginPassword) {
-    return bcrypt.compare(loginPassword, this.password);
+    let user = this;
+    return bcrypt.compare(loginPassword, user.password);
 }
 
 module.exports = mongoose.model('User', userSchema);

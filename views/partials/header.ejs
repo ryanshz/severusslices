@@ -26,10 +26,13 @@
                 <li><a href="/items">browse</a></li>
                 <li><a href="/new">sell</a></li>
                 <li>|</li>
-                <li><a href="/users/login">login</a></li>
-                <li><a href="/users/signup">signup</a></li>
-                <li><a href="/users/profile">profile</a></li>
-                <li><a href="/users/logout">logout</a></li>
+                <% if(!user){ %>
+                    <li><a href="/users/login">login</a></li>
+                    <li><a href="/users/signup">signup</a></li>
+                <% }else{ %>
+                    <li><a href="/users/profile">profile</a></li>
+                    <li><a href="/users/logout">logout</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>

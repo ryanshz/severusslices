@@ -2,9 +2,9 @@ const model = require('../models/items');
 
 //open item catalog
 exports.index = (req, res, next) => {
-    model.find({ active: 'true' })
+    model.find({ active: 'true' }).populate('seller', 'firstName lastName')
         .then(items => {
-            items.sort((a, b) => a.price - b.price); //sort by price
+            items.sort((a, b) => a.price - b.price);
             res.render('browse/index.ejs', { items });
         })
         .catch(err => {
@@ -18,15 +18,10 @@ exports.index = (req, res, next) => {
 exports.show = (req, res, next) => {
     let id = req.params.id;
     console.log('item id: ' + id)
-    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid item id');
-        err.status = 400;
-        return next(err);
-    }
-    model.findById(id)
+    model.findById(id).populate('seller', 'firstName lastName')
         .then(item => {
             if (item) {
-                model.find({ active: 'true' })
+                model.find({ active: 'true' }).populate('seller', 'firstName lastName')
                     .then(allItems => {
                         res.render('browse/item.ejs', { item, items: allItems });
                     })
@@ -46,6 +41,7 @@ exports.create = (req, res) => {
     if (req.file) {
         item.image = '/images/uploads/' + req.file.filename;
     }
+    item.seller = req.session.user;
     item.active = 'true';
     item.offer = 0;
     item.save(item)
@@ -67,11 +63,6 @@ exports.create = (req, res) => {
 exports.edit = (req, res, next) => {
     let id = req.params.id;
     console.log('item id: ' + id)
-    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid item id');
-        err.status = 400;
-        return next(err);
-    }
     model.findById(id)
         .then(item => {
             if (item) {
@@ -90,11 +81,6 @@ exports.update = (req, res, next) => {
     let newItem = req.body;
     let id = req.params.id;
     console.log('item id: ' + id)
-    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid item id');
-        err.status = 400;
-        return next(err);
-    }
     if (req.file) {
         newItem.image = '/images/uploads/' + req.file.filename;
     }
@@ -121,11 +107,6 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
     let id = req.params.id;
     console.log('item id: ' + id)
-    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid item id');
-        err.status = 400;
-        return next(err);
-    }
     model.findByIdAndDelete(id, { useFindAndModify: false })
         .then(item => {
             if (item) {
@@ -143,7 +124,6 @@ exports.delete = (req, res, next) => {
 exports.search = (req, res, next) => {
     let search = req.query.search;
     let items = model.find({ active: 'true' });
-
     if (search.length === 0) {
         res.render('browse/search.ejs', { items: [] });
     } else {
