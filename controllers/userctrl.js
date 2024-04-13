@@ -32,6 +32,7 @@ exports.authenticate = (req, res, next) => {
                 user.comparePassword(password)
                     .then(result => {
                         if (result) {
+                            req.session.user = user._id;
                             res.redirect('/users/profile');
                         } else {
                             console.log('wrong password');
@@ -47,11 +48,21 @@ exports.authenticate = (req, res, next) => {
         .catch(err => next(err));
 }
 
-exports.logout = (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
+exports.profile = (req, res) => {
+    let id = req.session.user;
+    model.findById(id)
+        .then(user => {
+            res.render('users/profile.ejs', { user: user });
+        })
+        .catch(err => next(err));
 }
 
-exports.profile = (req, res) => {
-    res.render('users/profile.ejs');
+exports.logout = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return next(err);
+        }else{
+            res.redirect('/');
+        }
+    });
 }

@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const mongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 
 //routes
 const itemRoutes = require('./routes/itemRoutes');
@@ -37,9 +39,11 @@ app.use(methodOverride('_method'));
 app.use(session({
     secret: 'lWwt6Eg0QenTUKvmtRf762DbCMaDiggw',
     resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 4*60*60*1000 }
+    saveUninitialized: false,
+    cookie: { maxAge: 4*60*60*1000 },
+    store: new mongoStore({ mongoUrl: url })
 }));
+app.use(flash());
 app.use((req, res, next) => {
     console.log(req.session);
     next();
