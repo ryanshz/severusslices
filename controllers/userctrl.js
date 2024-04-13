@@ -13,7 +13,12 @@ exports.create = (req, res, next) => {
         })
         .catch(err => {
             if (err.name === 'ValidationError') {
-                err.status = 400;
+                req.flash('error', err.message);
+                res.redirect('/users/signup');
+            }
+            if(err.code === 11000){
+                req.flash('error', 'email already exists');
+                res.redirect('/users/signup');
             }
             next(err);
         });
@@ -26,6 +31,7 @@ exports.login = (req, res) => {
 exports.authenticate = (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
+    console.log(req.flash());
     model.findOne({ email: email })
         .then(user => {
             if (user) {
@@ -33,15 +39,16 @@ exports.authenticate = (req, res, next) => {
                     .then(result => {
                         if (result) {
                             req.session.user = user._id;
+                            req.flash('success', 'logged in successfully');
                             res.redirect('/users/profile');
                         } else {
-                            console.log('wrong password');
+                            req.flash('error', 'wrong password');
                             res.redirect('/users/login');
                         }
                     })
                     .catch(err => next(err));    
             } else {
-                console.log('wrong email');
+                req.flash('error', 'wrong email');
                 res.redirect('/users/login');
             }
         })
