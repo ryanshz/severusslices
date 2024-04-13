@@ -2,10 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 //routes
 const itemRoutes = require('./routes/itemRoutes');
 const newRoutes = require('./routes/newRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //base stuff
 const app = express();
@@ -31,12 +33,25 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+//session
+app.use(session({
+    secret: 'lWwt6Eg0QenTUKvmtRf762DbCMaDiggw',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 4*60*60*1000 }
+}));
+app.use((req, res, next) => {
+    console.log(req.session);
+    next();
+});
+
 //routes
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' });
 });
 app.use('/items', itemRoutes);
 app.use('/new', newRoutes);
+app.use('/users', userRoutes);
 
 //error handlers
 app.use((req, res, next) => {
@@ -47,7 +62,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     console.log(err.stack);
-    if(!err.status){
+    if (!err.status) {
         err.status = 500;
         err.message = 'hey lol something broke on my end! my bad!';
     }

@@ -1,0 +1,29 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <section>
+            <form id="sellform" action='/users' method='POST'>
+                <div id="formhead">
+                    <h2>create an account</h2>
+                    <sub>items with a * are required.</sub>
+                </div>
+                <p>
+                    <label for="firstName">*first name: </label>
+                    <input type="text" name="firstName" id="firstName" required class="forminput">
+                </p>
+                <p>
+                    <label for="lastName">*last name: </label>
+                    <input type="text" name="lastName" id="lastName" required class="forminput">
+                </p>
+                <p>
+                    <label for="email">*email: </label>
+                    <input type="email" name="email" id="email" required class="forminput">
+                </p>
+                <p>
+                    <label for="password">*password: </label>
+                    <input type="password" name="password" id="password" required class="forminput">
+                </p>
+                <input type="submit" value="submit" id="formsubmit">
+            </form>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
