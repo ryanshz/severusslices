@@ -2,7 +2,7 @@ const model = require('../models/items');
 
 //open item catalog
 exports.index = (req, res, next) => {
-    model.find({ active: 'true' }).populate('seller', 'firstName lastName')
+    model.find({ active: true }).populate('seller', 'firstName lastName')
         .then(items => {
             items.sort((a, b) => a.price - b.price);
             res.render('browse/index.ejs', { items });
@@ -21,7 +21,7 @@ exports.show = (req, res, next) => {
     model.findById(id).populate('seller', 'firstName lastName')
         .then(item => {
             if (item) {
-                model.find({ active: 'true' }).populate('seller', 'firstName lastName')
+                model.find({ active: true }).populate('seller', 'firstName lastName')
                     .then(allItems => {
                         res.render('browse/item.ejs', { item, items: allItems });
                     })
@@ -42,8 +42,6 @@ exports.create = (req, res) => {
         item.image = '/images/uploads/' + req.file.filename;
     }
     item.seller = req.session.user;
-    item.active = 'true';
-    item.offer = 0;
     item.save(item)
         .then(newItem => {
 
@@ -123,14 +121,13 @@ exports.delete = (req, res, next) => {
 //search items
 exports.search = (req, res, next) => {
     let search = req.query.search;
-    let items = model.find({ active: 'true' });
     if (search.length === 0) {
         res.render('browse/search.ejs', { items: [] });
     } else {
-        model.find({ active: 'true' })
+        model.find({ active: true }).populate('seller details', 'firstName lastName')
             .then(items => {
-                let activeItems = items.filter(item => item.active === 'true');
-                let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())); //converts to lowercase and checks if search in name
+                let activeItems = items.filter(item => item.active === true);
+                let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || item.details.toLowerCase().includes(search.toLowerCase()));
                 searchItems.sort((a, b) => a.price - b.price);
                 res.render('browse/search.ejs', { items: searchItems });
             })

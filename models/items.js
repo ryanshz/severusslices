@@ -7,10 +7,10 @@ const itemSchema = new Schema({
     details: { type: String, required: [true, 'Details is required'] },
     alt: { type: String, required: [true, 'Alt is required'] },
     condition: { type: String, required: [true, 'Condition is required'] },
-    price: { type: Number, required: [true, 'Price is required'] },
+    price: { type: Number, required: [true, 'Price is required'], default: 0 },
     seller: { type: Schema.Types.ObjectId, ref: 'User'},
-    offer: { type: Number },
-    active: { type: String }
+    offer: { type: Number, default: 0 },
+    active: { type: Boolean, default: true}
 },
     { timestamps: true }
 );

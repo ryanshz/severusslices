@@ -58,7 +58,7 @@ exports.authenticate = (req, res, next) => {
 
 exports.profile = (req, res) => {
     let id = req.session.user;
-    Promise.all([model.findById(id), Items.find({seller:id})])
+    Promise.all([model.findById(id), Items.find({seller:id}).populate('seller', 'firstName lastName')])
         .then(results => {
             const [user, items] = results;
             res.render('users/profile.ejs', { user, items });
