@@ -303,3 +303,20 @@ nav>ul>li>a:hover{
     font-size: 36px;
     align-self: center;
 }
+
+.currentoffer{
+    width:85%;
+    padding: 4rem;
+    display: flex;
+    justify-content: center;
+}
+.currentofferdiv{
+    display: flex;
+    align-items: center;
+}
+.currentofferdiv>h2{
+    font-size: 36px;
+}
+.currentofferdiv>p{
+    font-size: 24px;
+}

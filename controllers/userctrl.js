@@ -10,6 +10,7 @@ exports.create = (req, res, next) => {
     user.save()
         .then(user => {
             console.log(user);
+            req.flash('success', 'user created successfully');
             res.redirect('./users/login');
         })
         .catch(err => {

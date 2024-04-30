@@ -1,8 +1,9 @@
-const model = require('../models/items');
+const itemModel = require('../models/items');
+const offerModel = require('../models/offers');
 
 //open item catalog
 exports.index = (req, res, next) => {
-    model.find({ active: true }).populate('seller', 'firstName lastName')
+    itemModel.find({ active: true }).populate('seller', 'firstName lastName')
         .then(items => {
             items.sort((a, b) => a.price - b.price);
             res.render('browse/index.ejs', { items });
@@ -18,10 +19,10 @@ exports.index = (req, res, next) => {
 exports.show = (req, res, next) => {
     let id = req.params.id;
     console.log('item id: ' + id)
-    model.findById(id).populate('seller', 'firstName lastName')
+    itemModel.findById(id).populate('seller', 'firstName lastName')
         .then(item => {
             if (item) {
-                model.find({ active: true }).populate('seller', 'firstName lastName')
+                itemModel.find({ active: true }).populate('seller', 'firstName lastName')
                     .then(allItems => {
                         res.render('browse/item.ejs', { item, items: allItems });
                     })
@@ -37,14 +38,14 @@ exports.show = (req, res, next) => {
 
 //make new item
 exports.create = (req, res) => {
-    let item = new model(req.body);
+    let item = new itemModel(req.body);
     if (req.file) {
         item.image = '/images/uploads/' + req.file.filename;
     }
     item.seller = req.session.user;
     item.save(item)
         .then(newItem => {
-
+            req.flash('success', 'item created');
             console.log(newItem)
             res.redirect('/items');
         })
@@ -61,7 +62,7 @@ exports.create = (req, res) => {
 exports.edit = (req, res, next) => {
     let id = req.params.id;
     console.log('item id: ' + id)
-    model.findById(id)
+    itemModel.findById(id)
         .then(item => {
             if (item) {
                 res.render('browse/edit.ejs', { item });
@@ -83,7 +84,7 @@ exports.update = (req, res, next) => {
         newItem.image = '/images/uploads/' + req.file.filename;
     }
     console.log(newItem)
-    model.findByIdAndUpdate(id, newItem, { useFindAndModify: false, runValidators: true })
+    itemModel.findByIdAndUpdate(id, newItem, { useFindAndModify: false, runValidators: true })
         .then(item => {
             if (item) {
                 res.redirect('/items/' + id);
@@ -104,11 +105,15 @@ exports.update = (req, res, next) => {
 //delete item
 exports.delete = (req, res, next) => {
     let id = req.params.id;
-    console.log('item id: ' + id)
-    model.findByIdAndDelete(id, { useFindAndModify: false })
+    console.log('item id: ' + id);
+    itemModel.findByIdAndDelete(id, { useFindAndModify: false })
         .then(item => {
             if (item) {
-                res.redirect('/items');
+                offerModel.deleteMany({ item: id })
+                    .then(() => {
+                        res.redirect('/items');
+                    })
+                    .catch(err => next(err));
             } else {
                 let err = new Error('Item not found with id ' + id);
                 err.status = 404;
@@ -124,7 +129,7 @@ exports.search = (req, res, next) => {
     if (search.length === 0) {
         res.render('browse/search.ejs', { items: [] });
     } else {
-        model.find({ active: true }).populate('seller details', 'firstName lastName')
+        itemModel.find({ active: true }).populate('seller details', 'firstName lastName')
             .then(items => {
                 let activeItems = items.filter(item => item.active === true);
                 let searchItems = activeItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || item.details.toLowerCase().includes(search.toLowerCase()));

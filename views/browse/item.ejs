@@ -15,16 +15,21 @@
                     <% } %>
                     <p><%= item.seller.firstName+' '+item.seller.lastName %></</p>
                     <p><%= item.details %></p>
-                    <p><%= item.offer %> offers</p>
+                    <% if(item.active){ %>
+                        <p><%= item.offer %> offers</p>
+                        <p>highest offer: $<%= item.highestOffer %></p>
+                    <% } else { %>
+                        <p>no longer available</p>
+                    <% } %>
                     <br>
-                    <a class="buy" href="#">offer</a>
-                    <a class="buy" href="#">buyout</a>
+                    <a href="<%= item.id %>/offers/new" class="buy">make an offer</a>
                 </div>
             </div>
             <% if(user == item.seller._id){ %>
                 <form id="deleditcolumn">
                     <button type="submit" formmethod="GET" class="edit" formaction="<%= item.id %>/edit">edit</a>
                     <button type="submit" formmethod="POST" class="edit" formaction="<%= item.id %>?_method=DELETE">del</a>
+                    <button type="submit" formmethod="GET" class="edit" formaction="<%= item.id %>/offers">offers</a>
                 </form>
             <% } %>
         </section>

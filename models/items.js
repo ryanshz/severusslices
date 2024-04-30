@@ -10,7 +10,8 @@ const itemSchema = new Schema({
     price: { type: Number, required: [true, 'Price is required'], default: 0 },
     seller: { type: Schema.Types.ObjectId, ref: 'User'},
     offer: { type: Number, default: 0 },
-    active: { type: Boolean, default: true}
+    active: { type: Boolean, default: true},
+    highestOffer: { type: Number, default: 0},
 },
     { timestamps: true }
 );

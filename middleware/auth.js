@@ -48,3 +48,24 @@ exports.validateId = (req, res, next) => {
     }
     return next();
 }
+
+exports.isSeller = (req, res, next) => {
+    let id = req.params.id;
+    model.findById(id)
+    .then(item => {
+        if(item){
+            if (item.seller == req.session.user) {
+                let err = new Error('you cannot make an offer on your own item');
+                err.status = 401;
+                return next(err);
+            } else {
+                return next();
+            }
+        }else{
+            let err = new Error('item not found');
+            err.status = 404;
+            return next(err);
+        }
+    })
+    .catch(err => next(err));
+}

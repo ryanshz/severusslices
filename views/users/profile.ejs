@@ -39,12 +39,14 @@
                         <form style="display:flex;justify-content:center;margin:2rem 0;gap:1rem;">
                             <button type="submit" formmethod="GET" class="edit" formaction="../items/<%= item.id %>/edit">edit</a>
                             <button type="submit" formmethod="POST" class="edit" formaction="../items/<%= item.id %>?_method=DELETE">del</a>
+                            <button type="submit" formmethod="GET" class="edit" formaction="../items/<%= item.id %>/offers">offers</a>
                         </form>
                     </div>
                 <% }) %>
             <% } else { %>
-                <br>
-                <h3>you have not created any listings yet</h3>
+                <section>
+                    <h3>you have not created any listings yet</h3>
+                </section>
             <% } %>
         </div>
     </main>

@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <section>
+            <h2>current item</h2>
+        </section>
+        <section class="currentitem">
+            <figure>
+                <img src="<%= item.image %>" alt="<%= item.alt %>">
+            </figure>
+            <div class="currentitemdiv">
+                <h2><%= item.name %></h2>
+                <div>
+                    <p><%= item.condition %></p>
+                    <% if(item.price !== null){ %>
+                        <p>$<%= item.price %>.00</p>
+                    <% } else { %>
+                        <p>Negotiable</p>
+                    <% } %>
+                    <p><%= item.seller.firstName+' '+item.seller.lastName %></</p>
+                    <p><%= item.details %></p>
+                    <p><%= item.offer %> offers</p>
+                    <p>highest offer: $<%= item.highestOffer %></p>
+                    <br>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>offers</h2>
+        </section>
+        <section class="currentoffer">
+            <% if(offers.length > 0){ %>
+                <% offers.forEach(offer => { %>
+                    <section class="currentofferdiv">
+                        <div>
+                            <p>buyer: <%= offer.buyer.firstName+' '+offer.buyer.lastName %></p>
+                            <p>offer amount: <%= offer.amount %></p>
+                        </div>
+                        <div>
+                            <% if(offer.status === 'pending'){ %>
+                                <form action="/items/<%= item._id %>/offers/<%= offer._id %>/accept" method="POST">
+                                    <input type="hidden" name="status" value="accepted">
+                                    <button type="submit" class="buy">Accept</button>
+                                </form>
+                            <% }else{ %>
+                                <p>status: <%= offer.status %></p>
+                            <% } %>
+                        </div>
+                    </section>
+                <% }) %>
+            <% }else{ %>
+                <p>no offers</p>
+            <% } %>
+        </section>
+    </main>
+<%- include('../partials/footer.ejs') %>

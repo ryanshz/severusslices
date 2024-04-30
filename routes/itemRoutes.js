@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/itemctrl.js');
 const upload = require('../middleware/multer.js');
 const { isLoggedIn, isAuthor, validateId } = require('../middleware/auth.js');
+const offers = require('./offerRoutes.js');
 
 //home page
 router.get('/', controller.index);
@@ -24,5 +25,8 @@ router.put('/:id', isLoggedIn, validateId, isAuthor, upload, controller.update);
 
 //delete item
 router.delete('/:id', isLoggedIn, validateId, isAuthor, controller.delete);
+
+//offers
+router.use('/:id/offers', offers);
 
 module.exports = router;

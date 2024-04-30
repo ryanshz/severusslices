@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs') %>
+    <main>
+        <section>
+            <div>
+                <h2>offer</h2>
+                <p>make an offer on the item below: </p>
+            </div>
+        </section>
+        <section class="currentitem">
+            <figure>
+                <img src="<%= item.image %>" alt="<%= item.alt %>">
+            </figure>
+            <div class="currentitemdiv">
+                <h2><%= item.name %></h2>
+                <div>
+                    <p><%= item.condition %></p>
+                    <% if(item.price !== null){ %>
+                        <p>$<%= item.price %>.00</p>
+                    <% } else { %>
+                        <p>Negotiable</p>
+                    <% } %>
+                    <p><%= item.seller.firstName+' '+item.seller.lastName %></</p>
+                    <p><%= item.details %></p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <form id="sellform" method="POST" action="/items/<%= item.id %>/offers">
+                <div id="formhead">
+                    <sub>items with a * are required.</sub>
+                    <p>highest offer: $<%= item.highestOffer %></p>
+                </div>
+                <p>
+                    <label for="amount">*offer: </label>
+                    <input type="number" name="amount" id="amount" required class="forminput" placeholder=".01">
+                </p>
+                <input type="submit" value="submit" id="formsubmit">
+            </form>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
