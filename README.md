@@ -1,8 +1,6 @@
-# appdevsite2
+# severusslices
 
-project for app dev due friday, mvc app
-
-search box when blank does not work!!
+web application for one of my classes last year, continuing to refactor and update so i can practice coding and devops stuff
 
 ## install
 
