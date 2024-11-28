@@ -15,7 +15,7 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 let port = 3000;
 let hostname = 'localhost';
-let url = 'mongodb+srv://ryanshz:6RLpb8kXMm3SepsI@rscharlotte.tltbepr.mongodb.net/severusslices?retryWrites=true&w=majority&appName=rscharlotte';
+let url = process.env.DATABASE_URL;
 app.set('view engine', 'ejs');
 
 //db connection
@@ -37,7 +37,7 @@ app.use(methodOverride('_method'));
 
 //session
 app.use(session({
-    secret: 'lWwt6Eg0QenTUKvmtRf762DbCMaDiggw',
+    secret: process.env.DATABASE_SECRET,
     resave: false,
     saveUninitialized: false,
     store: new mongoStore({ mongoUrl: url }),
